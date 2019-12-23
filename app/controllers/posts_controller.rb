@@ -1,3 +1,4 @@
+
 class PostsController < ApplicationController
   def index
   	@posts = Post.all
@@ -12,7 +13,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params)
+    
+    @post = Post.new(post_params)
+  
     @post.save
     redirect_to post_path(@post)
   end
@@ -29,7 +32,7 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params(*args)
-    params.require(:post).permit(*args)
+  def post_params
+    params.require(:post).permit(:title, :description)
   end
 end
